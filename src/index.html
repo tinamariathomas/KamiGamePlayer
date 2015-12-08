@@ -11,14 +11,13 @@
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
         var grid = [
-            ['g', 'g', 'g'],
-            ['g', 'g', 'g'],
+            ['g', 'b', 'g'],
+            ['g', 'b', 'g'],
             ['b', 'b', 'b']
         ];
 
         $(grid).each(function (rowIndex, row) {
             $(row).each(function (columnIndex, element) {
-                alert(element);
                 createGridBox(element);
             })
             lineBreak();

@@ -1,16 +1,15 @@
-function createGridBox(color){
-	if(color=='b')
-		var $cssClass = "blueBox"
-	else
-		var $cssClass =""
-
-
-
-    var $input = $('<input type="button" value="" class="blueBox" />');
+function createGridBox(color) {
+    var cssClass;
+    if (color == 'b')
+        cssClass = "blueBox"
+    else
+        cssClass = "greenBox";
+    var buttonTag = '<input type="button" value="" class="'+cssClass+'" />';
+    var $input = $(buttonTag);
     $input.appendTo($("body"));
 }
 
-function lineBreak(){
-	var $input = $('<br/>');
+function lineBreak() {
+    var $input = $('<br/>');
     $input.appendTo($("body"));
 }
