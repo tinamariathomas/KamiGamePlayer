@@ -1,0 +1,32 @@
+<html>
+<head>
+    <script type="text/javascript" language="Javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" language="Javascript" src="buildGrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="button.css">
+</head>
+
+<body>
+<h2>Kami Game</h2>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        var grid = [
+            ['g', 'g', 'g'],
+            ['g', 'g', 'g'],
+            ['b', 'b', 'b']
+        ];
+
+        $(grid).each(function (rowIndex, row) {
+            $(row).each(function (columnIndex, element) {
+                alert(element);
+                createGridBox(element);
+            })
+            lineBreak();
+
+        })
+
+    });
+</script>
+
+</body>
+</html>
