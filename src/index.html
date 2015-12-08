@@ -19,12 +19,16 @@
             ['g', 'g', 'g', 'g', 'g', 'g']
         ];
         loadMainGrid($grid,"mainGridLocation");
-        var distinctColors = findDistinctColors($grid);
-        alert(distinctColors);
+        var $distinctColors = findDistinctColors($grid);
+        loadColorPalette($distinctColors);
     });
 </script>
 
 <div id="mainGridLocation">
+
+</div>
+
+<div id="colorPalette">
 
 </div>
 

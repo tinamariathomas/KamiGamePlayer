@@ -42,3 +42,9 @@ function findDistinctColors(grid) {
     })
     return colors;
 }
+
+function loadColorPalette(distinctColors){
+    $(distinctColors).each(function(index,color){
+        createGridBox(color,"colorPalette");
+    })
+}
