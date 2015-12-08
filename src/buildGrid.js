@@ -1,13 +1,13 @@
-function createGridBox(color) {
+function createGridBox(color, tag) {
     var cssClass = matchCssStyle(color);
     var buttonTag = '<input type="button" value="" class="' + cssClass + '" />';
     var $input = $(buttonTag);
-    $input.appendTo($("body"));
+    $input.appendTo($("#" + tag));
 }
 
-function lineBreak() {
+function lineBreak(tag) {
     var $input = $('<br/>');
-    $input.appendTo($("body"));
+    $input.appendTo($("#" + tag));
 }
 
 function matchCssStyle(color) {
@@ -22,12 +22,23 @@ function matchCssStyle(color) {
     return cssClass;
 }
 
-function loadMainGrid(grid){
+function loadMainGrid(grid, tag) {
+
     $(grid).each(function (rowIndex, row) {
         $(row).each(function (columnIndex, element) {
-            createGridBox(element);
+            createGridBox(element, tag);
         })
-        lineBreak();
-
+        lineBreak(tag);
     })
+}
+
+function findDistinctColors(grid) {
+    var colors = [];
+    $(grid).each(function (index, row) {
+        $(row).each(function (columnIndex, element) {
+            if (($.inArray(element, colors))==-1)
+                colors.push(element)
+        })
+    })
+    return colors;
 }
