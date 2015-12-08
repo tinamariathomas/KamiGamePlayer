@@ -21,3 +21,13 @@ function matchCssStyle(color) {
     }
     return cssClass;
 }
+
+function loadMainGrid(grid){
+    $(grid).each(function (rowIndex, row) {
+        $(row).each(function (columnIndex, element) {
+            createGridBox(element);
+        })
+        lineBreak();
+
+    })
+}

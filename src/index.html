@@ -18,15 +18,7 @@
             ['b', 'b', 'b','b','b','g'],
             ['g', 'g', 'g','g','g','g']
         ];
-
-        $(grid).each(function (rowIndex, row) {
-            $(row).each(function (columnIndex, element) {
-                createGridBox(element);
-            })
-            lineBreak();
-
-        })
-
+        loadMainGrid(grid);
     });
 </script>
 
