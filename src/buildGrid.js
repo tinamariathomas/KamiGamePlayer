@@ -1,8 +1,8 @@
-function createGridBox(color, tag) {
+function createGridBox(color, divBlockId, type) {
     var cssClass = matchCssStyle(color);
-    var buttonTag = '<input type="button" value="" class="' + cssClass + '" />';
+    var buttonTag = '<input type="button" value="" class="' + cssClass + ' ' + type + '" />';
     var $input = $(buttonTag);
-    $input.appendTo($("#" + tag));
+    $input.appendTo($("#" + divBlockId));
 }
 
 function lineBreak(tag) {
@@ -26,7 +26,7 @@ function loadMainGrid(grid, tag) {
 
     $(grid).each(function (rowIndex, row) {
         $(row).each(function (columnIndex, element) {
-            createGridBox(element, tag);
+            createGridBox(element, tag, "puzzleBox");
         })
         lineBreak(tag);
     })
@@ -36,15 +36,15 @@ function findDistinctColors(grid) {
     var colors = [];
     $(grid).each(function (index, row) {
         $(row).each(function (columnIndex, element) {
-            if (($.inArray(element, colors))==-1)
+            if (($.inArray(element, colors)) == -1)
                 colors.push(element)
         })
     })
     return colors;
 }
 
-function loadColorPalette(distinctColors){
-    $(distinctColors).each(function(index,color){
-        createGridBox(color,"colorPalette");
+function loadColorPalette(distinctColors) {
+    $(distinctColors).each(function (index, color) {
+        createGridBox(color, "colorPalette", "paletteBox");
     })
 }
