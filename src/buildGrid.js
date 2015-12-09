@@ -47,17 +47,18 @@ function findDistinctColors(grid) {
 
 function loadColorPalette(distinctColors) {
     $(distinctColors).each(function (index, color) {
-        createGridBox(color, "colorPalette", "paletteBox");
+        var button = createGridBox(color, "colorPalette", "paletteBox");
+        button.attr('id', color);
     })
 }
 
 
 function setSelectedColor() {
     $('.paletteBox').on('click', function () {
-        var classes = $(this).attr('class').split(' ');
         $('.paletteBox').removeClass('selected');
         $(this).addClass('selected');
-        globalVar.selectedColor = classes[0];
+
+        globalVar.selectedColor = getCssColorClass($(this).attr('id'));
     })
 }
 
@@ -69,7 +70,7 @@ function onGridClick() {
             selectedBoxId = $(this).attr('id');
             listOfNeighbours = find4Neighbours(selectedBoxId);
             neighboursOfSameColor = filteredNeighbors(selectedBoxId, listOfNeighbours);
-            
+            alert(neighboursOfSameColor)
 
         }
     })
@@ -113,14 +114,23 @@ function isWithinArrayBounds(index) {
 }
 
 function filteredNeighbors(selectedBoxId, listOfNeighbours) {
-    var color = $('#' + selectedBoxId).attr('class').split(' ')[0];
+    var color = getCssColorClass(selectedBoxId)
     alert('current color = ' + color);
     var filteredNeighbors = [];
     $.each(listOfNeighbours, function (index, boxID) {
-        var neighborColor = $('#' + boxID).attr('class').split(' ')[0];
-        if (neighborColor == color)
+        if ($('#' + boxID).hasClass(color))
             filteredNeighbors.push(boxID);
     })
     return filteredNeighbors;
 }
 
+function getCssColorClass(selectedBoxId){
+    var availableStyleColors = ['blueBox','greenBox'];
+    var classes = $('#'+selectedBoxId).attr('class').split(' ');
+    var color ='';
+    $.each(classes,function(index,styleClass){
+        if($.inArray(styleClass, availableStyleColors) > -1)
+            color= styleClass;
+    })
+    return color;
+}
