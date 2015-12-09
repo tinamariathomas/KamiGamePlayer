@@ -4,6 +4,11 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" language="Javascript" src="buildGrid.js"></script>
     <link rel="stylesheet" type="text/css" href="button.css">
+    <script type="text/javascript">
+        var globalVar = {
+            selectedColor: ''
+        };
+    </script>
 </head>
 
 <body>
@@ -18,9 +23,15 @@
             ['b', 'b', 'b', 'b', 'b', 'g'],
             ['g', 'g', 'g', 'g', 'g', 'g']
         ];
-        loadMainGrid($grid,"mainGridLocation");
+        loadMainGrid($grid, "mainGridLocation");
         var $distinctColors = findDistinctColors($grid);
         loadColorPalette($distinctColors);
+
+        $(function () {
+            getSelectedColor();
+        })
+
+
     });
 </script>
 

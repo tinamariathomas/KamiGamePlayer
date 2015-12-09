@@ -48,3 +48,14 @@ function loadColorPalette(distinctColors) {
         createGridBox(color, "colorPalette", "paletteBox");
     })
 }
+
+
+function getSelectedColor(){
+    $('.paletteBox').on('click',function(){
+        var classes = $(this).attr('class').split(' ');
+        $('.paletteBox').removeClass('selected');
+        $(this).addClass('selected');
+        globalVar.selectedColor  = classes[0];
+    })
+}
+

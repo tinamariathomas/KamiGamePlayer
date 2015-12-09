@@ -1,3 +1,7 @@
+.selected{
+    border: 4px solid #000000 !important;
+}
+
 .blueBox {
     -moz-box-shadow: inset 0px -3px 7px 0px #188dc4;
     -webkit-box-shadow: inset 0px -3px 7px 0px #188dc4;
