@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="button.css">
     <script type="text/javascript">
         var globalVar = {
-            selectedColor: ''
+            selectedColor: '',
+            size:0,
+            grid:[]
         };
     </script>
 </head>
@@ -15,7 +17,7 @@
 <h2>Kami Game</h2>
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
-        var $grid = [
+        globalVar.grid = [
             ['g', 'b', 'g', 'g', 'g', 'g'],
             ['g', 'b', 'g', 'g', 'g', 'g'],
             ['b', 'b', 'b', 'b', 'g', 'g'],
@@ -23,12 +25,14 @@
             ['b', 'b', 'b', 'b', 'b', 'g'],
             ['g', 'g', 'g', 'g', 'g', 'g']
         ];
-        loadMainGrid($grid, "mainGridLocation");
-        var $distinctColors = findDistinctColors($grid);
+        globalVar.size=globalVar.grid.length;
+        loadMainGrid(globalVar.grid, "mainGridLocation");
+        var $distinctColors = findDistinctColors(globalVar.grid);
         loadColorPalette($distinctColors);
 
         $(function () {
-            getSelectedColor();
+            setSelectedColor();
+            onGridClick();
         })
 
 
