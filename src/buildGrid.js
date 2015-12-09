@@ -68,9 +68,9 @@ function onGridClick() {
         else {
             selectedBoxId = $(this).attr('id');
             listOfNeighbours = find4Neighbours(selectedBoxId);
+            neighboursOfSameColor = filteredNeighbors(selectedBoxId, listOfNeighbours);
             
-            //check if the four neighbours are of the same color as that of the selected box. remove those that are not
-            // if any are left, apply the color, and repeat
+
         }
     })
 }
@@ -82,33 +82,45 @@ function find4Neighbours(selectedBoxId) {
     var neighboringRows = [];
     var rowUp = currentRowIndex - 1;
     var rowDown = currentRowIndex + 1;
-    if(isWithinArrayBounds(rowUp))
+    if (isWithinArrayBounds(rowUp))
         neighboringRows.push(rowUp);
-    if(isWithinArrayBounds(rowDown))
+    if (isWithinArrayBounds(rowDown))
         neighboringRows.push(rowDown);
 
     var neighboringColumns = [];
     var columnRight = currentColumnIndex + 1;
     var columnLeft = currentColumnIndex - 1;
-    if(isWithinArrayBounds(columnRight))
+    if (isWithinArrayBounds(columnRight))
         neighboringColumns.push(columnRight);
-    if(isWithinArrayBounds(columnLeft))
+    if (isWithinArrayBounds(columnLeft))
         neighboringColumns.push(columnLeft);
 
-    var neighbors=[];
+    var neighbors = [];
 
-    $.each(neighboringRows,function(rowIndex,rowValue){
-        neighbors.push(rowValue+"-"+currentColumnIndex)
+    $.each(neighboringRows, function (rowIndex, rowValue) {
+        neighbors.push(rowValue + "-" + currentColumnIndex)
     })
 
-    $.each(neighboringColumns,function(columnIndex,columnValue){
-        neighbors.push(currentRowIndex+"-"+columnValue)
+    $.each(neighboringColumns, function (columnIndex, columnValue) {
+        neighbors.push(currentRowIndex + "-" + columnValue)
     })
 
     return neighbors;
 }
 
-function isWithinArrayBounds(index){
-    return (index>=0&&index<globalVar.size)
+function isWithinArrayBounds(index) {
+    return (index >= 0 && index < globalVar.size)
+}
+
+function filteredNeighbors(selectedBoxId, listOfNeighbours) {
+    var color = $('#' + selectedBoxId).attr('class').split(' ')[0];
+    alert('current color = ' + color);
+    var filteredNeighbors = [];
+    $.each(listOfNeighbours, function (index, boxID) {
+        var neighborColor = $('#' + boxID).attr('class').split(' ')[0];
+        if (neighborColor == color)
+            filteredNeighbors.push(boxID);
+    })
+    return filteredNeighbors;
 }
 
