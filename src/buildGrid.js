@@ -67,10 +67,21 @@ function onGridClick() {
         if (globalVar.selectedColor.length == 0)
             alert('Please select a color from the palette');
         else {
+
             selectedBoxId = $(this).attr('id');
             listOfNeighbours = find4Neighbours(selectedBoxId);
+
             neighboursOfSameColor = filteredNeighbors(selectedBoxId, listOfNeighbours);
-            alert(neighboursOfSameColor)
+            $('#'+selectedBoxId).removeClass(getCssColorClass(selectedBoxId))
+            $('#'+selectedBoxId).addClass(globalVar.selectedColor)
+
+            //for each of those neighbors, remove the existing color class and add the new class
+
+            $.each(neighboursOfSameColor,function(index,boxID){
+                $('#'+boxID).removeClass(getCssColorClass(boxID))
+                $('#'+boxID).addClass(globalVar.selectedColor)
+
+            })
 
         }
     })
@@ -115,7 +126,6 @@ function isWithinArrayBounds(index) {
 
 function filteredNeighbors(selectedBoxId, listOfNeighbours) {
     var color = getCssColorClass(selectedBoxId)
-    alert('current color = ' + color);
     var filteredNeighbors = [];
     $.each(listOfNeighbours, function (index, boxID) {
         if ($('#' + boxID).hasClass(color))
