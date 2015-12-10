@@ -71,14 +71,13 @@ function onGridClick() {
             var nextBoxes = []
             var baseColor = getCssColorClass($(this).attr('id'));
             selectedBoxId.push($(this).attr('id'));
-             //do {
+             do {
                 $.each(selectedBoxId, function (index, boxID) {
                     nextBoxes = nextBoxes.concat(updateColor(boxID,baseColor))
                 })
                 selectedBoxId = nextBoxes;
-                alert(selectedBoxId);
                 nextBoxes = [];
-            //} while (selectedBoxId.length > 0);
+            } while (selectedBoxId.length > 0);
         }
     })
 }
