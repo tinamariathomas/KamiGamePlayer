@@ -67,27 +67,31 @@ function onGridClick() {
         if (globalVar.selectedColor.length == 0)
             alert('Please select a color from the palette');
         else {
-            globalVar.numberOfClicks = globalVar.numberOfClicks + 1;
-            $('#numberOfClicks').text(globalVar.numberOfClicks);
-            var selectedBoxId = []
-            var nextBoxes = []
             var baseColor = getCssColorClass($(this).attr('id'));
-            selectedBoxId.push($(this).attr('id'));
-             do {
-                $.each(selectedBoxId, function (index, boxID) {
-                    nextBoxes = nextBoxes.concat(updateColor(boxID,baseColor))
-                })
-                selectedBoxId = nextBoxes;
-                nextBoxes = [];
-            } while (selectedBoxId.length > 0);
+            if (globalVar.selectedColor != baseColor) {
+
+                globalVar.numberOfClicks = globalVar.numberOfClicks + 1;
+                $('#numberOfClicks').text(globalVar.numberOfClicks);
+                var selectedBoxId = []
+                var nextBoxes = []
+
+                selectedBoxId.push($(this).attr('id'));
+                do {
+                    $.each(selectedBoxId, function (index, boxID) {
+                        nextBoxes = nextBoxes.concat(updateColor(boxID, baseColor))
+                    })
+                    selectedBoxId = nextBoxes;
+                    nextBoxes = [];
+                } while (selectedBoxId.length > 0);
+            }
         }
     })
 }
 
-function updateColor(selectedBoxId,baseColor) {
+function updateColor(selectedBoxId, baseColor) {
     listOfNeighbours = find4Neighbours(selectedBoxId);
 
-    neighboursOfSameColor = filteredNeighbors(listOfNeighbours,baseColor);
+    neighboursOfSameColor = filteredNeighbors(listOfNeighbours, baseColor);
     $('#' + selectedBoxId).removeClass(getCssColorClass(selectedBoxId))
     $('#' + selectedBoxId).addClass(globalVar.selectedColor)
 
@@ -136,7 +140,7 @@ function isWithinArrayBounds(index) {
     return (index >= 0 && index < globalVar.size)
 }
 
-function filteredNeighbors(listOfNeighbours,baseColor) {
+function filteredNeighbors(listOfNeighbours, baseColor) {
     var filteredNeighbors = [];
     $.each(listOfNeighbours, function (index, boxID) {
         if ($('#' + boxID).hasClass(baseColor))
