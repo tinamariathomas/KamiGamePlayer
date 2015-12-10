@@ -7,8 +7,8 @@
     <script type="text/javascript">
         var globalVar = {
             selectedColor: '',
-            size:0,
-            grid:[]
+            size: 0,
+            grid: []
         };
     </script>
 </head>
@@ -25,7 +25,7 @@
             ['b', 'b', 'b', 'b', 'b', 'g'],
             ['g', 'g', 'g', 'g', 'g', 'g']
         ];
-        globalVar.size=globalVar.grid.length;
+        globalVar.size = globalVar.grid.length;
         loadMainGrid(globalVar.grid, "mainGridLocation");
         var $distinctColors = findDistinctColors(globalVar.grid);
         loadColorPalette($distinctColors);
@@ -39,13 +39,14 @@
     });
 </script>
 
-<div id="mainGridLocation">
+<div id="gameArea">
+    <div id="mainGridLocation">
 
+    </div>
+    <br><br><br>
+    <div id="colorPalette">
+
+    </div>
 </div>
-
-<div id="colorPalette">
-
-</div>
-
 </body>
 </html>

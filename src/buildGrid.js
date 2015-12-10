@@ -67,24 +67,35 @@ function onGridClick() {
         if (globalVar.selectedColor.length == 0)
             alert('Please select a color from the palette');
         else {
-
-            selectedBoxId = $(this).attr('id');
-            listOfNeighbours = find4Neighbours(selectedBoxId);
-
-            neighboursOfSameColor = filteredNeighbors(selectedBoxId, listOfNeighbours);
-            $('#'+selectedBoxId).removeClass(getCssColorClass(selectedBoxId))
-            $('#'+selectedBoxId).addClass(globalVar.selectedColor)
-
-            //for each of those neighbors, remove the existing color class and add the new class
-
-            $.each(neighboursOfSameColor,function(index,boxID){
-                $('#'+boxID).removeClass(getCssColorClass(boxID))
-                $('#'+boxID).addClass(globalVar.selectedColor)
-
-            })
-
+            var selectedBoxId = []
+            var nextBoxes = []
+            var baseColor = getCssColorClass($(this).attr('id'));
+            selectedBoxId.push($(this).attr('id'));
+             //do {
+                $.each(selectedBoxId, function (index, boxID) {
+                    nextBoxes = nextBoxes.concat(updateColor(boxID,baseColor))
+                })
+                selectedBoxId = nextBoxes;
+                alert(selectedBoxId);
+                nextBoxes = [];
+            //} while (selectedBoxId.length > 0);
         }
     })
+}
+
+function updateColor(selectedBoxId,baseColor) {
+    listOfNeighbours = find4Neighbours(selectedBoxId);
+
+    neighboursOfSameColor = filteredNeighbors(listOfNeighbours,baseColor);
+    $('#' + selectedBoxId).removeClass(getCssColorClass(selectedBoxId))
+    $('#' + selectedBoxId).addClass(globalVar.selectedColor)
+
+    $.each(neighboursOfSameColor, function (index, boxID) {
+        $('#' + boxID).removeClass(getCssColorClass(boxID))
+        $('#' + boxID).addClass(globalVar.selectedColor)
+
+    })
+    return neighboursOfSameColor;
 }
 
 function find4Neighbours(selectedBoxId) {
@@ -124,23 +135,22 @@ function isWithinArrayBounds(index) {
     return (index >= 0 && index < globalVar.size)
 }
 
-function filteredNeighbors(selectedBoxId, listOfNeighbours) {
-    var color = getCssColorClass(selectedBoxId)
+function filteredNeighbors(listOfNeighbours,baseColor) {
     var filteredNeighbors = [];
     $.each(listOfNeighbours, function (index, boxID) {
-        if ($('#' + boxID).hasClass(color))
+        if ($('#' + boxID).hasClass(baseColor))
             filteredNeighbors.push(boxID);
     })
     return filteredNeighbors;
 }
 
-function getCssColorClass(selectedBoxId){
-    var availableStyleColors = ['blueBox','greenBox'];
-    var classes = $('#'+selectedBoxId).attr('class').split(' ');
-    var color ='';
-    $.each(classes,function(index,styleClass){
-        if($.inArray(styleClass, availableStyleColors) > -1)
-            color= styleClass;
+function getCssColorClass(selectedBoxId) {
+    var availableStyleColors = ['blueBox', 'greenBox'];
+    var classes = $('#' + selectedBoxId).attr('class').split(' ');
+    var color = '';
+    $.each(classes, function (index, styleClass) {
+        if ($.inArray(styleClass, availableStyleColors) > -1)
+            color = styleClass;
     })
     return color;
 }
