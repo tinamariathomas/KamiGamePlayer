@@ -85,6 +85,9 @@ function onGridClick() {
                 } while (selectedBoxId.length > 0);
             }
         }
+        var isDone = isGridASingleColor();
+        if (isDone == true)
+            alert("Done!");
     })
 }
 
@@ -158,4 +161,14 @@ function getCssColorClass(selectedBoxId) {
             color = styleClass;
     })
     return color;
+}
+
+function isGridASingleColor() {
+    var allColors = []
+    $('.puzzleBox').each(function () {
+        var currentColor = getCssColorClass($(this).attr('id'));
+        if ($.inArray(currentColor, allColors) == -1)
+            allColors.push(currentColor);
+    })
+    return (allColors.length==1);
 }
