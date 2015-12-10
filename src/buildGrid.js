@@ -87,7 +87,7 @@ function onGridClick() {
         }
         var isDone = isGridASingleColor();
         if (isDone == true)
-            alert("Done!");
+            alert("Game finished : Number of moves taken = " + globalVar.numberOfClicks);
     })
 }
 
