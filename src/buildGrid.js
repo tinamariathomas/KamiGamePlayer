@@ -67,6 +67,8 @@ function onGridClick() {
         if (globalVar.selectedColor.length == 0)
             alert('Please select a color from the palette');
         else {
+            globalVar.numberOfClicks = globalVar.numberOfClicks + 1;
+            $('#numberOfClicks').text(globalVar.numberOfClicks);
             var selectedBoxId = []
             var nextBoxes = []
             var baseColor = getCssColorClass($(this).attr('id'));

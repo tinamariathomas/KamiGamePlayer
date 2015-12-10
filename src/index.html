@@ -8,12 +8,14 @@
         var globalVar = {
             selectedColor: '',
             size: 0,
-            grid: []
+            grid: [],
+            numberOfClicks:0
         };
     </script>
 </head>
 
 <body>
+<a> Hello</a>
 <h2>Kami Game</h2>
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
@@ -46,6 +48,10 @@
     <br><br><br>
     <div id="colorPalette">
 
+    </div>
+    <br><br><br>
+    <div id="playerScore">
+        Number of clicks :<span id = "numberOfClicks">0</span>
     </div>
 </div>
 </body>
